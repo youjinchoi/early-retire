@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "early-retire"
+version = "0.1.0"
+description = ""
+authors = ["youjinchoi <dev.youjin.choi@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-binance = "^1.0.10"
+python-dotenv = "^0.17.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
