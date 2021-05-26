@@ -3,7 +3,7 @@ import os
 from binance import Client
 from dotenv import load_dotenv
 
-from constants import Symbol, OrderType
+from constants import Symbol
 from results import PlaceOrderResult
 from logger_factory import logger
 
@@ -20,9 +20,13 @@ class BinanceService:
     def get_price(self, pair_symbol) -> float:
         try:
             response = self._client.get_symbol_ticker(symbol=pair_symbol)
-            return float(response.get("price", "0"))
+            price = float(response.get("price", 0))
+            logger.debug(f"current {pair_symbol} price: {price}")
+            return price
+        except ConnectionError as error:
+            logger.warning(f"binance price api error: {error}")
         except Exception:
-            logger.exception("binance api error")
+            logger.exception("unexpected error while getting price from binance")
 
     def get_balance(self, symbol) -> float:
         return self._balance_dict[symbol, 0]
